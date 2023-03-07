@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drag and Drop</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="data:image/png;base64,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"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1 class="main-title">Kanban Board</h1>
+    <div class="drag-container">
+      <ul class="drag-list">
+        <!-- Backlog column -->
+        <li class="drag-column backlog-column">
+          <span class="header">
+            <h1>Backlog</h1>
+          </span>
+          <!-- Backlog Content -->
+          <div id="backlog-content" class="custom-scroll">
+            <ul
+              class="drag-item-list"
+              id="backlog-list"
+              ondrop="drop(event)"
+              ondragover="allowDrop(event)"
+              ondragenter="dragEnter(0)"
+            ></ul>
+          </div>
+
+          <!-- add button group -->
+          <div class="add-btn-group">
+            <div class="add-btn">
+              <span class="plus-sign">+</span>
+              <span>Add Item</span>
+            </div>
+            <div class="add-btn solid">
+              <span>Save Item</span>
+            </div>
+
+            <div class="add-container">
+              <div class="add-item"></div>
+            </div>
+          </div>
+        </li>
+
+        <!-- Progress column -->
+        <li class="drag-column progress-column">
+          <span class="header">
+            <h1>Progress</h1>
+          </span>
+          <!-- Progress Content -->
+          <div id="progress-content" class="custom-scroll">
+            <ul
+              class="drag-item-list"
+              id="progress-list"
+              ondrop="drop(event)"
+              ondragover="allowDrop(event)"
+              ondragenter="dragEnter(1)"
+            ></ul>
+          </div>
+
+          <!-- add button group -->
+          <div class="add-btn-group">
+            <div class="add-btn">
+              <span class="plus-sign">+</span>
+              <span>Add Item</span>
+            </div>
+            <div class="add-btn solid">
+              <span>Save Item</span>
+            </div>
+
+            <div class="add-container">
+              <div class="add-item"></div>
+            </div>
+          </div>
+        </li>
+
+        <!-- Complete column -->
+        <li class="drag-column complete-column">
+          <span class="header">
+            <h1>Complete</h1>
+          </span>
+          <!-- complete Content -->
+          <div id="complete-content" class="custom-scroll">
+            <ul
+              class="drag-item-list"
+              id="complete-list"
+              ondrop="drop(event)"
+              ondragover="allowDrop(event)"
+              ondragenter="dragEnter(2)"
+            ></ul>
+          </div>
+
+          <!-- add button group -->
+          <div class="add-btn-group">
+            <div class="add-btn">
+              <span class="plus-sign">+</span>
+              <span>Add Item</span>
+            </div>
+            <div class="add-btn solid">
+              <span>Save Item</span>
+            </div>
+
+            <div class="add-container">
+              <div class="add-item"></div>
+            </div>
+          </div>
+        </li>
+
+        <!-- On-hold column -->
+        <li class="drag-column on-hold-column">
+          <span class="header">
+            <h1>On-hold</h1>
+          </span>
+          <!-- on-hold Content -->
+          <div id="on-hold-content" class="custom-scroll">
+            <ul
+              class="drag-item-list"
+              id="on-hold-list"
+              ondrop="drop(event)"
+              ondragover="allowDrop(event)"
+              ondragenter="dragEnter(3)"
+            ></ul>
+          </div>
+
+          <!-- add button group -->
+          <div class="add-btn-group">
+            <div class="add-btn">
+              <span class="plus-sign">+</span>
+              <span>Add Item</span>
+            </div>
+            <div class="add-btn solid">
+              <span>Save Item</span>
+            </div>
+
+            <div class="add-container">
+              <div class="add-item"></div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <!-- Script -->
+    <script src="script.js"></script>
+  </body>
+</html>
