@@ -1,28 +1,34 @@
-const addBtns = document.querySelectorAll(".add-btn:not(.solid)");
-const saveItemBtns = document.querySelectorAll(".solid");
-const addItemContainers = document.querySelectorAll(".add-container");
-const addItems = document.querySelectorAll(".add-item");
+const addBtns = document.querySelectorAll(".add-btn:not(.solid)")!;
+const saveItemBtns = document.querySelectorAll(".solid")!;
+const addItemContainers = document.querySelectorAll(".add-container")!;
+const addItems = document.querySelectorAll(".add-item")!;
 // Item Lists
-const listColumns = document.querySelectorAll(".drag-item-list");
-const backlogList = document.getElementById("backlog-list");
-const progressList = document.getElementById("progress-list");
-const completeList = document.getElementById("complete-list");
-const onHoldList = document.getElementById("on-hold-list");
+const listColumns = document.querySelectorAll(".drag-item-list")!;
+const backlogList = document.getElementById("backlog-list") as HTMLUListElement;
+const progressList = document.getElementById(
+  "progress-list"
+) as HTMLUListElement;
+const completeList = document.getElementById(
+  "complete-list"
+) as HTMLUListElement;
+const onHoldList = document.getElementById("on-hold-list") as HTMLUListElement;
 
 // Items
-let updatedOnLoad = false;
+let updatedOnLoad: boolean = false;
+
+type ListArrays = Array<string[]>;
 
 // Initialize Arrays
-let backlogListArray = [];
-let progressListArray = [];
-let completeListArray = [];
-let onHoldListArray = [];
-let listArrays = [];
+let backlogListArray: string[] = [];
+let progressListArray: string[] = [];
+let completeListArray: string[] = [];
+let onHoldListArray: string[] = [];
+let listArrays: ListArrays;
 
 // Drag Functionality
-let dragging = false;
-let draggedItem;
-let currentColumn;
+let dragging: boolean = false;
+let draggedItem: HTMLLIElement;
+let currentColumn: number;
 
 // Get Arrays from localStorage if available, set default values if not
 function getSavedColumns() {
@@ -40,7 +46,6 @@ function getSavedColumns() {
 }
 
 getSavedColumns();
-updateSavedColumns();
 
 // Set localStorage Arrays
 function updateSavedColumns() {
@@ -58,23 +63,29 @@ function updateSavedColumns() {
   });
 }
 
-//  filter array
-function filterArray(arr) {
+updateSavedColumns();
+
+//  filter array to prevent empty items from saving into local storage
+function filterArray(arr: string[]) {
   const filteredArray = arr.filter((item) => item !== null);
   return filteredArray;
 }
 
 // Create DOM Elements for each list item
-function createItemEl(columnEl, column, item, index) {
-  console.log(item, column, index);
+function createItemEl(
+  columnEl: HTMLUListElement,
+  column: number,
+  item: string,
+  index: number
+) {
   // List Item
   const listEl = document.createElement("li");
   listEl.classList.add("drag-item");
   listEl.textContent = item;
   listEl.draggable = true;
   listEl.setAttribute("ondragstart", "drag(event)");
-  listEl.contentEditable = true;
-  listEl.id = index;
+  listEl.contentEditable = `true`;
+  listEl.id = `${index}`;
   listEl.setAttribute("onfocusout", `updateItem(${index}, ${column})`);
   // Append
   columnEl.appendChild(listEl);
@@ -120,7 +131,7 @@ function updateDOM() {
 }
 
 // update item - delete if necessary, or update array value
-function updateItem(id, column) {
+function updateItem(id: number, column: number) {
   // selected column
   const selectedArray = listArrays[column];
   // selected item
@@ -130,47 +141,47 @@ function updateItem(id, column) {
     if (!selectedColumnEl[id].textContent) {
       delete selectedArray[id];
     } else {
-      selectedArray[id] = selectedColumnEl[id].textContent;
+      selectedArray[id] = selectedColumnEl[id].textContent!;
     }
     updateDOM();
   }
 }
 
 // Add to column list, reset textbox
-function addToColumn(column) {
+function addToColumn(column: number) {
   const itemText = addItems[column].textContent;
   const selectedArray = listArrays[column];
-  selectedArray.push(itemText);
+  selectedArray.push(itemText!);
   addItems[column].textContent = "";
   updateDOM();
 }
 
 // show add item input box
-function showInputBox(column) {
-  addBtns[column].style.visibility = "hidden";
-  saveItemBtns[column].style.display = "flex";
-  addItemContainers[column].style.display = "flex";
+function showInputBox(column: number) {
+  (addBtns[column] as any).style.visibility = "hidden";
+  (saveItemBtns[column] as any).style.display = "flex";
+  (addItemContainers[column] as any).style.display = "flex";
 }
 
 // hide input box after saving
-function hideInputBox(column) {
-  addBtns[column].style.visibility = "visible";
-  saveItemBtns[column].style.display = "none";
-  addItemContainers[column].style.display = "none";
+function hideInputBox(column: number) {
+  (addBtns[column] as any).style.visibility = "visible";
+  (saveItemBtns[column] as any).style.display = "none";
+  (addItemContainers[column] as any).style.display = "none";
   addToColumn(column);
 }
 
 // when Item starts dragging
-function drag(e) {
+function drag(e: any) {
   draggedItem = e.target;
   dragging = true;
 }
 
-function allowDrop(e) {
+function allowDrop(e: any) {
   e.preventDefault();
 }
 
-function drop(e) {
+function drop(e: any) {
   e.preventDefault();
   // remove styling
   listColumns.forEach((column) => {
@@ -184,7 +195,7 @@ function drop(e) {
   updateArrays();
 }
 
-function dragEnter(column) {
+function dragEnter(column: number) {
   listColumns[column].classList.add("over");
   currentColumn = column;
 }
@@ -192,17 +203,19 @@ function dragEnter(column) {
 // update arrays after dragging and dropping
 function updateArrays() {
   // loop through the list children and push to respective arrays
-  backlogListArray = Array.from(backlogList.children).map((i) => i.textContent);
+  backlogListArray = Array.from(backlogList.children).map(
+    (i) => i.textContent!
+  );
 
   progressListArray = Array.from(progressList.children).map(
-    (i) => i.textContent
+    (i) => i.textContent!
   );
 
   completeListArray = Array.from(completeList.children).map(
-    (i) => i.textContent
+    (i) => i.textContent!
   );
 
-  onHoldListArray = Array.from(onHoldList.children).map((i) => i.textContent);
+  onHoldListArray = Array.from(onHoldList.children).map((i) => i.textContent!);
   updateDOM();
 }
 
